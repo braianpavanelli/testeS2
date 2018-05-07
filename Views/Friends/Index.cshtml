@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TesteS2IT.Models.Friend>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<h2>Lista de Amigos</h2>
+<table class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info" id="tblFriends">
+    <thead>
+        <tr>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Nome</th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Endereço</th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Telefone</th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">E-mail</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

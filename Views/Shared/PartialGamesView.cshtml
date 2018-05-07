@@ -1,0 +1,44 @@
+﻿<link href="~/Content/styleCarrossel.css" rel="stylesheet" />
+<script src="~/Scripts/modernizr.custom.53451.js"></script>
+
+
+
+<section id="dg-container" class="dg-container">
+    <div class="dg-wrapper">
+        @if (ViewData["Games"] != null)
+        {
+            foreach (var item in ViewData["Games"] as List<TesteS2IT.Models.Games>)
+            {
+                @*<a href="@Url.Action("Details","Games", new { id = item.ID })"><img src="@Url.Content(String.IsNullOrEmpty(item.UrlImage) ? "~/Images/no_picture_game.png" : item.UrlImage )" alt="@item.Name"></a>*@
+                <a href="@Url.Action("Details","Games", new { id = item.ID })">
+                    @if (!String.IsNullOrEmpty(item.UrlImage))
+                    {
+                        <img src="@Url.Content(item.UrlImage)" alt="@item.Name">
+
+                    }
+                    else
+                    {
+                        <img src="~/Images/no_picture_game.png" alt="@item.Name">
+                        <span>@item.Name</span>
+                    }
+                </a>
+            }
+
+        }
+    </div>
+    
+    <nav>
+        <span class="dg-prev"><</span>
+        <span class="dg-next">></span>
+    </nav>
+</section>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#dg-container').gallery();
+    });
+</script>

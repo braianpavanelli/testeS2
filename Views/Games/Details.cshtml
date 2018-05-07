@@ -1,0 +1,59 @@
+﻿@model TesteS2IT.Models.Games
+
+
+<div>
+    <h4>Detalhes do Jogo</h4>
+    <hr />
+    <div class="row">
+        <div class="col-7">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
+
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.UrlImage)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UrlImage)
+                </dd>*@
+
+            </dl>
+        </div>
+        <div class="col-4" style="height: 300px;">
+            @if (!string.IsNullOrEmpty(Model.UrlImage))
+            {
+                <img style="max-height:100%; max-width:100%;" src="@Url.Content(Model.UrlImage)" alt="@Model.Name" />
+            }
+            else
+            {
+                <img style="max-height:100%; max-width:100%;" src="~/Images/no_picture_game.png" alt="Jogo Sem Imagem" />
+            }
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

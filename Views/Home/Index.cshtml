@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Bem Vindo</h1>
+    <p class="lead">Esta é uma aplicação para avaliação de Braian Pavanelli</p>
+    <p><a href="@Url.Action("Index", "Resume") " class="btn btn-primary btn-lg">Saiba mais &raquo;</a></p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div id="divGames" class="col-7">
+            @{ Html.RenderPartial("PartialGamesView", ViewData["Games"]);  }
+            <div class="row">
+                <a href="@Url.Action("Index","Games")" title="Ver Lista">
+                    <img src="/Images/list_red.png" alt="Ver Lista" style="height: 12.5%;position: absolute;top: 271px;left: 76%;">
+                </a>
+                <a href="@Url.Action("Create","Games")" title="Adicionar Jogo">
+                    <img src="/Images/add_blue.png" alt="Adicionar Jogo" style="left: 88%;position: absolute;top: 65%;" height="15%">
+                </a>
+            </div>
+        </div>
+        <div id="divLending" class="col-5">
+            <div class="row">
+                <h3>Essa é sua lista de jogos emprestados</h3>
+            </div>
+            <div class="row" style="max-height: 315px; overflow: auto;">
+                @{ Html.RenderPartial("PartialLendedView", ViewData["Lendies"]);  }
+            </div>
+            <div clss="row">
+                <a href="@Url.Action("Create","Lending")" title="Emprestar">
+                    <img src="~/Images/add_blue.png" alt="Emprestar" style="position: relative; float:right;height: 55px;margin-top: -41px;">
+                </a>
+                <a href="@Url.Action("Index","Lending")" title="Lista de Empréstimos">
+                    <img src="~/Images/list_red.png" alt="Lista de Empréstimos" style="position: relative; float:right;height: 49px;margin-top: -38px;">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-lg-4">
+        <div id="divFriends" class="col-12 ">
+            @{ Html.RenderPartial("PartialFriendView", ViewData["Friends"]);  }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TesteS2IT.Models.Games>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info" id="tblGames">
+    <thead>
+        <tr>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                Possui Foto Cadastrada
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.UrlImage))
+                {
+                    <p>Ok icon: <span class="glyphicon glyphicon-ok"></span></p>
+                    @*<span class="glyphicon glyphicon-ok" style="color: limegreen"></span>*@
+                }
+                else
+                {
+                    <p>X icon: <span class="glyphicon glyphicon-ok"></span></p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
