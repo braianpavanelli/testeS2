@@ -231,7 +231,10 @@ namespace TesteS2IT.Models
         {
             using (var db = new DBContext())
             {
-                db.Lending.Remove(lending);
+                //db.Lending.Remove(lending);
+                db.Lending.Attach(lending);
+                db.Entry(lending).State = EntityState.Deleted;
+
                 db.SaveChanges();
                 return lending;
             }

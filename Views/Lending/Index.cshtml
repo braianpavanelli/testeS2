@@ -4,6 +4,9 @@
 }
 
 <h2>Lista de todos Empréstimos</h2>
+<p>
+    @Html.ActionLink("Criar Novo", "Create")
+</p>
 <table class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info" id="tblLending">
     <thead>
         <tr>
@@ -18,10 +21,10 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Games.Name, "Edit", "Games", new { id = item.ID }, null)
+                    @Html.ActionLink(item.Games.Name, "Edit", "Games", new { id = item.GameId }, null)
                 </td>
                 <td>
-                    @Html.ActionLink(item.Friend.Name, "Edit","Friends", new { id = item.ID }, null)
+                    @Html.ActionLink(item.Friend.Name, "Edit","Friends", new { id = item.FriendId }, null)
                 </td>
                 <td>
                     @(item.DateLended.HasValue ? item.DateLended.Value.ToString("dd/MM/yyyy") : "-")
@@ -52,9 +55,9 @@
                                 $("#tblLending tbody").append(
                                     "<tr>" +
                                     "   <td>" + lending.Games.Name + "</td>" +
-                                    "   <td>" + pessoa.Friends.Name + "</td>" +
-                                    "   <td>" + pessoa.DateLended + "</td>" +
-                                    "   <td>" + pessoa.DateReturned + "</td>" +
+                                    "   <td>" + lending.Friends.Name + "</td>" +
+                                    "   <td>" + lending.DateLended + "</td>" +
+                                    "   <td>" + lending.DateReturned + "</td>" +
                                     "   <td>" +
                                     "       <a href='/Lending/Edit/" + lending.ID + "'>Editar</a> |" +
                                     "       <button type=\"button\" class=\"btn btn-link\" data-item=\"" + lending.ID + "\">Deletar</button>" +

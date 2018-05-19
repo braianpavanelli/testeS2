@@ -3,3 +3,6 @@ obj/
 bin/
 Properties/
 App_Data/
+
+# tipos de arquivo 
+*.bak

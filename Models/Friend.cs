@@ -188,7 +188,8 @@ namespace TesteS2IT.Models
         {
             using (var db = new DBContext())
             {
-                db.Friend.Remove(friend);
+                db.Friend.Attach(friend);
+                db.Entry(friend).State = EntityState.Deleted;
                 db.SaveChanges();
                 return friend;
             }

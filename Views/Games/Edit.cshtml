@@ -47,29 +47,59 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                        <input type="submit" value="Salvar" class="btn btn-default" />
                     </div>
+                </div>
+            </div>
+
+            <div class="col-4" >
+                <div class="row" style="height: 300px;">
+                    @if (!string.IsNullOrEmpty(Model.UrlImage))
+                {
+                        <img style="max-height:100%; max-width:100%;" src="@Url.Content(Model.UrlImage)" alt="@Model.Name" />
+                    }
+                    else
+                    {
+                        <img style="max-height:100%; max-width:100%;" src="~/Images/no_picture_game.png" alt="Jogo Sem Imagem" />
+                    }
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-danger" data-item="@Model.ID">Excluir Imagem</button>
+                    @*@Html.ActionLink("Excluir Imagem", "DeleteImage", new { id = Model.ID }, new { @class = "btn btn-danger" })*@
                 </div>
             </div>
         </div>
 
 
-        <div class="col-4" style="height: 300px;">
-            @if (!string.IsNullOrEmpty(Model.UrlImage))
-                {
-                <img style="max-height:100%; max-width:100%;" src="@Url.Content(Model.UrlImage)" alt="@Model.Name" />
-            }
-            else
-            {
-                <img style="max-height:100%; max-width:100%;" src="~/Images/no_picture_game.png" alt="Jogo Sem Imagem" />
-            }
 
-            @Html.ActionLink("Excluir Imagem", "DeleteImage", "Games", new { htmlAttributes = new { @class = "btn-danger" } })
-        </div>
     </div>
 
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para Lista", "Index")
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-danger").click(function () {
+                var id = $(this).attr('data-item');
+                if (confirm("Você quer realmente remover esta imagem?")) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Games/DeleteImage/" + id,
+                        success: function (data) {
+                            window.location.href = data.Url;
+                        },
+                        error: function (data) {
+                            alert("Houve um erro na pesquisa.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+

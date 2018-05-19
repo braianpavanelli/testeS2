@@ -1,35 +1,43 @@
 ﻿
 
-<table id="lending" class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info">
-    <thead>
-        <tr role="row">
-            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Jogo</th>
-            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Amigo</th>
-            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Empréstimo</th>
-            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Devolução</th>
-        </tr>
-    </thead>
+@if (ViewData["Lendies"] != null && (ViewData["Lendies"] as List<TesteS2IT.Models.Lending>).Count > 0)
+{
+    <table id="lending" class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info">
+        <thead>
+            <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Jogo</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Amigo</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Empréstimo</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 256px;" aria-sort="ascending" aria-label="Date: activate to sort column descending">Devolução</th>
+            </tr>
+        </thead>
 
-        @if (ViewData["Lendies"] != null)
+        @foreach (var item in ViewData["Lendies"] as List<TesteS2IT.Models.Lending>)
         {
-            foreach (var item in ViewData["Lendies"] as List<TesteS2IT.Models.Lending>)
-            {
-                <tr>
-                    <td>
-                        @item.Games.Name
-                    </td>
-                    <td>
-                        @item.Friend.Name
-                    </td>
-                    <td>
-                        @(item.DateLended.HasValue ? item.DateLended.Value.ToString("dd/MM/yyyy") : "-")
-                    </td>
-                    <td>
-                        @(item.DateReturned.HasValue ? item.DateReturned.Value.ToString("dd/MM/yyyy") : "-")
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @item.Games.Name
+                </td>
+                <td>
+                    @item.Friend.Name
+                </td>
+                <td>
+                    @(item.DateLended.HasValue ? item.DateLended.Value.ToString("dd/MM/yyyy") : "-")
+                </td>
+                <td>
+                    @(item.DateReturned.HasValue ? item.DateReturned.Value.ToString("dd/MM/yyyy") : "-")
+                </td>
+            </tr>
         }
 
-</table>
 
+    </table>
+}
+else
+{
+    <div class="col-12" style="min-height: 75px">
+        <p class="text-secondary">
+            Você não possui jogos emprestados no momento!
+        </p>
+    </div>
+}

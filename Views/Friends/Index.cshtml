@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TesteS2IT.Models.Friend>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo", "Create")
 </p>
 <h2>Lista de Amigos</h2>
 <table class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info" id="tblFriends">
@@ -29,10 +29,45 @@
             @Html.DisplayFor(modelItem => item.Mail)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
+            <button type="button" class="btn btn-link" data-item="@item.ID">Deletar</button>
         </td>
     </tr>
 }
 
 </table>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-link").click(function () {
+                var id = $(this).attr('data-item');
+                if (confirm("Você tem certeza que gostaria de excluir este registro?")) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Friends/Delete/" + id,
+                        success: function (data) {
+                            $("#tblFriends tbody > tr").remove();
+                            $.each(data, function (i, friend) {
+                                $("#tblFriends tbody").append(
+                                    "<tr>" +
+                                    "   <td>" + friend.Name + "</td>" +
+                                    "   <td>" + friend.Address + "</td>" +
+                                    "   <td>" + friend.Phone + "</td>" +
+                                    "   <td>" + friend.Mail + "</td>" +
+                                    "   <td>" +
+                                    "       <a href='/Games/Edit/" + friend.ID + "'>Editar</a> |" +
+                                    "       <button type=\"button\" class=\"btn btn-link\" data-item=\"" + friend.ID + "\">Deletar</button>" +
+                                    "   </td>" +
+                                    "</tr>"
+                                );
+                            });
+                        },
+                        error: function (data) {
+                            alert("Houve um erro na pesquisa.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

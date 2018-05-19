@@ -216,7 +216,8 @@ namespace TesteS2IT.Models
         {
             using (var db = new DBContext())
             {
-                db.Games.Remove(game);
+                db.Games.Attach(game);
+                db.Entry(game).State = EntityState.Deleted;
                 db.SaveChanges();
                 return game;
             }

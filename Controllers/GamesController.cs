@@ -13,7 +13,7 @@ namespace TesteS2IT.Controllers
     public class GamesController : Controller
     {
         // GET: Games
-        public ActionResult Index()
+                public ActionResult Index()
         {
             return View(Games.FindAllGames());
         }
@@ -118,9 +118,12 @@ namespace TesteS2IT.Controllers
         {
             if (ModelState.IsValid)
             {
+                game = Games.FindGame(game.ID);
+                game.UrlImage = string.Empty;
                 Games.UpdateGames(game);
             }
-            return RedirectToAction("Details");
+            //return Json(Games.FindGame(game.ID));
+            return Json(new { Url = game.ID });
         }
 
 
